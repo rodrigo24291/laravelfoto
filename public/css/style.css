@@ -1,0 +1,39 @@
+.perfil{width: 3rem;
+border-radius: 50%;
+height: 3rem;
+}
+
+.format-time{
+    display: flex;
+    padding: 0px !important;
+}
+
+.coment{margin-left: 0.5rem;
+padding-top: 0px !important;
+display: flex;
+align-items: center;
+}
+
+.perfil-com{
+    margin-left:  1rem;
+}
+.comentario{width: 100%}
+.form-coment{
+    
+}
+
+.co{width: 98%;
+margin-left: 1%;
+}
+.cora{cursor: pointer;}
+
+.perfil-imagen{
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    
+}
+
+.datos-biografia{
+margin-left: 2rem;
+}
