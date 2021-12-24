@@ -8,7 +8,7 @@
 
 <div class="card">
   <div class="card-header">
-      @if(auth::user()->image !== null)
+      @if($im->users->image !== null)
       <img src="{{route('image',['imagen'=>$im->users->image])}}" class="col-md-4" style="
     width: 2rem;
     border-radius: 50%;
@@ -17,10 +17,30 @@
 " >
       @endif
       <a >{{$im->users->name}} {{$im->users->surname}} |@ {{$im->users->nick}}</a>
+      @if($im->users->id == auth::user()->id)
+
+<div class="dropdown " style="
+display: inline-block;
+position: absolute;
+right: 3rem;
+">
+<span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">  
+</span>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+<a href="{{route('image.destroy',['id'=>$im->id])}}" class="dropdown-item">X Borrar publicacion</a>    
+
+</div>
+</div> 
+
+
+
+@endif
   </div>
     <div class="card-body" style="padding: 0px !important">
+        @if($im->image_path !== null)
           <img src="{{route('image.show',['imagen'=>$im->image_path])}}" class="card-img-top" alt="...">
-
+@endif
       
           <div class="co">
         
@@ -50,8 +70,10 @@ $fer='blanco'
 @endphp
 @endif
 @endforeach
-@if($fer=='blanco')
-<i onclick="empezar({{$im->id}})" class="fas fa-heart cora" data-id="{{$im->id}}" style="font-size: 2rem; margin-right: 0.4rem" ></i>
+
+@if($fer=='negro')
+
+<i class="fas fa-heart cora" onclick="empezar({{$im->id}})"  data-id="{{$im->id}}" style="font-size: 2rem; margin-right: 0.4rem" ></i>
 
 @else
 
@@ -68,7 +90,7 @@ $fer='blanco'
           <p class="card-text"><small class="text-muted">{{ \FormatTime::LongTimeFilter($ims->created_at)}}</small></p></div>
           <div>{{$ims->content}}</div>
           @if ($ims->user_id == auth::user()->id)
-          <a class="btn btn-info my-3" href="">Editar</a> <a class="btn btn-danger my-3" onclick="borrar({{$ims->id}})">Eliminar</a>
+          <a class="btn btn-danger my-3" onclick="borrar({{$ims->id}})">Eliminar</a>
          @endif
       </div>
       @endforeach  

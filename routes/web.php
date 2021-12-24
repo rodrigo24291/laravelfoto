@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'ImageControll@mostrartodo')->name('image.mostrartodo');
+
 Route::get('/cona', 'UserController@index')->name('config');
 Route::post('/cona/actualizar', 'UserController@store')->name('actualizar');
 
@@ -33,6 +32,8 @@ Route::get('/mostrartodo', 'ImageControll@mostrartodo')->name('image.mostrartodo
 Route::get('/mostrartodo/{imagen}', 'ImageControll@show')->name('image.show');
 
 Route::get('/mos/{id}', 'ImageControll@perfil')->name('image.perfil');
+
+Route::get('/imagen/{id}', 'ImageControll@destroy')->name('image.destroy');
 
 
 Route::post('/comment', 'CommentController@store')->name('comment.comentar');

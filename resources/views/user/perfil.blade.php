@@ -6,9 +6,11 @@
     <div class="row justify-content-center">
         
 <div class="col-md-6">
+    
     <div class="row" style="align-items: center">
-        
+         @if($imagen->image !== null)
         <div><img src="{{route('image',['imagen'=>$imagen->image])}}" class="perfil-imagen"></div>
+        @endif
         <div class="datos-biografia">
             <h2>{{'@'.$imagen->nick}}</h2>
         <p>{{$imagen->name}} {{$imagen->surname}}</p>
@@ -24,7 +26,7 @@
 
 <div class="card">
   <div class="card-header">
-      @if(auth::user()->image !== null)
+      @if($imagen->image !== null)
       <img src="{{route('image',['imagen'=>$imagen->image])}}" class="col-md-4" style="
     width: 2rem;
     border-radius: 50%;
@@ -33,6 +35,25 @@
 " >
       @endif
       <a href="{{route('perfil.show',['id'=>$imagen->id])}}">{{$imagen->name}} {{$imagen->surname}} |@ {{$imagen->nick}}</a>
+      @if($images->users->id == auth::user()->id)
+
+      <div class="dropdown " style="
+    display: inline-block;
+    position: absolute;
+    right: 3rem;
+">
+  <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">  
+</span>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    
+    <a href="{{route('image.destroy',['id'=>$images->id])}}" class="dropdown-item">X Borrar publicacion</a>    
+    
+  </div>
+</div> 
+    
+
+
+      @endif
   </div>
     <div class="card-body" style="padding: 0px !important">
           <img src="{{route('image.show',['imagen'=>$images->image_path])}}" class="card-img-top" alt="...">

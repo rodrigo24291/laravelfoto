@@ -1,18 +1,19 @@
 
 
 @extends('layouts.app')
-
 @section('content')
 
 
 @foreach($image as $images)
+
 <div class="container py-3">
     <div class="row justify-content-center">
         <div class="col-md-6">
 
 <div class="card">
   <div class="card-header">
-      @if(auth::user()->image !== null)
+   
+      @if($images->users->image !== null)
       <img src="{{route('image',['imagen'=>$images->users->image])}}" class="col-md-4" style="
     width: 2rem;
     border-radius: 50%;
@@ -21,7 +22,28 @@
 " >
       @endif
      
+    
       <a href="{{route('perfil.show',['id'=>$images->user_id])}}">{{$images->users->name}} {{$images->users->surname}} |@ {{$images->users->nick}}</a>
+      @if($images->users->id == auth::user()->id)
+
+<div class="dropdown " style="
+display: inline-block;
+position: absolute;
+right: 3rem;
+">
+<span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">  
+</span>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+<a href="{{route('image.destroy',['id'=>$images->id])}}" class="dropdown-item">X Borrar publicacion</a>    
+
+</div>
+</div> 
+
+
+
+@endif
+
   </div>
     <div class="card-body" style="padding: 0px !important">
           <img src="{{route('image.show',['imagen'=>$images->image_path])}}" class="card-img-top" alt="...">

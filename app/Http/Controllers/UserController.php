@@ -78,7 +78,7 @@ if($image){
        $user->nick=$nick;
        
        $user->update(); 
-     return redirect()->route('config')   
+     return redirect()->route('config');   
     }
 
     /**

@@ -69,3 +69,11 @@ function borrar(id){
 })
     
 }
+
+//Mensaje alerta de agregar publicacion
+
+const alert=document.getElementById('alert');
+console.log(alert);
+setTimeout(() => {
+ alert.remove(); 
+}, 3000);

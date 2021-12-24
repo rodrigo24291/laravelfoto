@@ -42,8 +42,10 @@
         
 <div class="col-md-6">
     <div class="row" style="align-items: center">
-      
+    
+      @if($usuarios->image !== null)
         <div><img src="{{route('image',['imagen'=>$usuarios->image])}}" class="perfil-imagen"></div>
+        @endif
         <div class="datos-biografia">
             <h2>{{'@'.$usuarios->nick}}</h2>
         <p>{{$usuarios->name}} {{$usuarios->surname}}</p>

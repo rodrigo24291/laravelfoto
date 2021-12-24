@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Image;
+use App\User;
+use App\Comment;
+use App\Like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
@@ -59,16 +62,16 @@ class ImageControll extends Controller
        $imagens->user_id=Auth::user()->id;
        $imagens->description=$description;
        $imagens->save();
+       $valido="valido";
        
-       return redirect()->route('imagen.create');
+       return redirect()->route('imagen.create')->with('validado',$valido);
     }
     
     public function mostrartodo(){
-        
+       
         $imagen=Image::orderBy('id','desc')->paginate(5);
         $imagen2=Image::all();
-        
-        
+      
 return view('image.mostrartodo')->with('image', $imagen)->with('imagen2',$imagen2);
     }
     
@@ -119,6 +122,11 @@ return view('image.mostrartodo')->with('image', $imagen)->with('imagen2',$imagen
      */
     public function destroy($id)
     {
-        //
+      $user=Auth::id();
+      
+        Like::where('image_id',$id)->delete();
+        Comment::where('image_id',$id)->delete();
+        Image::find($id)->delete();
+        return redirect()->route('perfil.show',['id'=>$user]);
     }
 }
